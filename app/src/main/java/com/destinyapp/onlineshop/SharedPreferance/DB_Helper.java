@@ -2,17 +2,22 @@ package com.destinyapp.onlineshop.SharedPreferance;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class DB_Helper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "onlineshop.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //Session
     public static final String TABLE_NAME_SESSION = "session";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_NAMA = "nama";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PROFILE = "profile";
+    public static final String COLUMN_ALAMAT = "alamat";
     public static final String COLUMN_LEVEL = "level";
 
     //Favorite
@@ -35,6 +40,9 @@ public class DB_Helper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE "+TABLE_NAME_SESSION+" (" +
                 COLUMN_USERNAME+" TEXT NOT NULL, "+
                 COLUMN_NAMA+" TEXT NOT NULL, "+
+                COLUMN_EMAIL+" TEXT NOT NULL, "+
+                COLUMN_PROFILE+" TEXT NOT NULL, "+
+                COLUMN_ALAMAT+" TEXT NOT NULL, "+
                 COLUMN_LEVEL+" TEXT NOT NULL);"
         );
         db.execSQL("CREATE TABLE "+TABLE_FAVORITE+" (" +
@@ -63,14 +71,28 @@ public class DB_Helper extends SQLiteOpenHelper {
 
 
     //SAVE
-    public void saveUser(String username,String nama,String level){
+    public void saveUser(String username,String nama,String email,String profile,String alamat,String level){
         SQLiteDatabase db =this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, username);
         values.put(COLUMN_NAMA, nama);
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PROFILE, profile);
+        values.put(COLUMN_ALAMAT, alamat);
         values.put(COLUMN_LEVEL, level);
         db.insert(TABLE_NAME_SESSION,null,values);
         db.close();
+    }
+    public Cursor checkSession(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query ="SELECT * FROM "+TABLE_NAME_SESSION+"";
+        Cursor cursor = db.rawQuery(query,null);
+        return cursor;
+    }
+    public void userLogout(Context context){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_NAME_SESSION+"");
+        Toast.makeText(context, "Logout Berhasil", Toast.LENGTH_SHORT).show();
     }
     public void saveFavorite(String id,String nama,String harga,String deskripsi,String gambar){
         SQLiteDatabase db =this.getWritableDatabase();

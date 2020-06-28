@@ -40,7 +40,7 @@
                         android:orientation="horizontal"
                         android:padding="10dp">
                         <LinearLayout
-                            android:id="@+id/linearBelanja"
+                            android:id="@+id/linearSeluruh"
                             android:layout_margin="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -56,13 +56,41 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="2"
-                                android:text="Belanja"
+                                android:text="Seluruh Transaksi"
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+                        <LinearLayout
+                            android:id="@+id/linearPembelian"
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:background="@drawable/button_rounded">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:src="@drawable/transport"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:text="History Pembelian"
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:gravity="center"/>
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/linearMyProduct"
+                            android:id="@+id/linearPenjualan"
                             android:layout_margin="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -78,13 +106,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="2"
-                                android:text="Productku"
+                                android:text="History Penjualan"
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:gravity="center"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
 
             </RelativeLayout>
         </LinearLayout>

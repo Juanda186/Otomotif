@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_home_second"
-        android:name="com.destinyapp.onlineshop.Activity.ui.home.HomeSecondFragment"
+        android:name="com.destinyapp.onlineshop.Activity.ui.home.HomeFragment"
         android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
             app:destination="@id/nav_home" />
@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.destinyapp.onlineshop.Activity.ui.tentang.TentangFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_tentang" />
+        android:name="com.destinyapp.onlineshop.Activity.ui.history.HistoryFragment"
+        android:label="@string/menu_history"
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.destinyapp.onlineshop.Activity.ui.slideshow.SlideshowFragment"
+        android:name="com.destinyapp.onlineshop.Activity.ui.tentang.TentangFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_tentang" />
 </navigation>

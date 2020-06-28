@@ -2,8 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="100"
+        android:title="Profile"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_isi"
+        android:orderInCategory="100"
+        android:title="Pengisian Wallet"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_wallet"
+        android:orderInCategory="100"
+        android:title="Isi Wallet"
+        app:showAsAction="ifRoom" />
 </menu>

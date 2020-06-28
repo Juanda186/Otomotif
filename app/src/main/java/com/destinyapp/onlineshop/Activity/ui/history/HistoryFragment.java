@@ -1,4 +1,4 @@
-package com.destinyapp.onlineshop.Activity.ui.home;
+package com.destinyapp.onlineshop.Activity.ui.history;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -7,41 +7,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.destinyapp.onlineshop.Activity.LoginActivity;
-import com.destinyapp.onlineshop.Activity.MainActivity;
 import com.destinyapp.onlineshop.Activity.ProductActivity;
 import com.destinyapp.onlineshop.R;
 import com.destinyapp.onlineshop.SharedPreferance.DB_Helper;
 
-public class HomeFragment extends Fragment {
-    LinearLayout Product,MyProduct;
+public class HistoryFragment extends Fragment {
+
+
+    LinearLayout Seluruh,Beli,Jual;
     DB_Helper dbHelper;
     String username,nama,email,profile,alamat,level;
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_history, container, false);
+        return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Product=view.findViewById(R.id.linearBelanja);
-        MyProduct=view.findViewById(R.id.linearMyProduct);
+
         dbHelper = new DB_Helper(getActivity());
         Cursor cursor = dbHelper.checkSession();
         if (cursor.getCount()>0){
@@ -58,24 +50,36 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
-        Product.setOnClickListener(new View.OnClickListener() {
+        Seluruh=view.findViewById(R.id.linearSeluruh);
+        Beli=view.findViewById(R.id.linearPembelian);
+        Jual=view.findViewById(R.id.linearPenjualan);
+
+        Seluruh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goInput = new Intent(getActivity(),ProductActivity.class);
+                Intent goInput = new Intent(getActivity(), ProductActivity.class);
                 goInput.putExtra("ACTIVITY","All");
                 getActivity().startActivities(new Intent[]{goInput});
                 startActivity(goInput);
             }
         });
-        MyProduct.setOnClickListener(new View.OnClickListener() {
+        Beli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goInput = new Intent(getActivity(),ProductActivity.class);
-                goInput.putExtra("ACTIVITY","My");
+                Intent goInput = new Intent(getActivity(), ProductActivity.class);
+                goInput.putExtra("ACTIVITY","Beli");
                 getActivity().startActivities(new Intent[]{goInput});
                 startActivity(goInput);
             }
         });
-
+        Jual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goInput = new Intent(getActivity(), ProductActivity.class);
+                goInput.putExtra("ACTIVITY","Jual");
+                getActivity().startActivities(new Intent[]{goInput});
+                startActivity(goInput);
+            }
+        });
     }
 }
