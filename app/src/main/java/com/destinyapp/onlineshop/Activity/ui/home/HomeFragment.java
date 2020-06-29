@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.destinyapp.onlineshop.Activity.InputProductActivity;
 import com.destinyapp.onlineshop.Activity.LoginActivity;
 import com.destinyapp.onlineshop.Activity.MainActivity;
 import com.destinyapp.onlineshop.Activity.ProductActivity;
@@ -22,7 +23,7 @@ import com.destinyapp.onlineshop.R;
 import com.destinyapp.onlineshop.SharedPreferance.DB_Helper;
 
 public class HomeFragment extends Fragment {
-    LinearLayout Product,MyProduct;
+    LinearLayout Product,MyProduct,Tambah;
     DB_Helper dbHelper;
     String username,nama,email,profile,alamat,level;
     public HomeFragment() {
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Product=view.findViewById(R.id.linearBelanja);
         MyProduct=view.findViewById(R.id.linearMyProduct);
+        Tambah=view.findViewById(R.id.linearTambah);
         dbHelper = new DB_Helper(getActivity());
         Cursor cursor = dbHelper.checkSession();
         if (cursor.getCount()>0){
@@ -76,6 +78,12 @@ public class HomeFragment extends Fragment {
                 startActivity(goInput);
             }
         });
-
+        Tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),InputProductActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

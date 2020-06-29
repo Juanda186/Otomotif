@@ -13,5 +13,6 @@
     <string name="menu_slideshow">Tentang</string>
 
     <string name="home_second">Home Second</string>
-    <string name="base_url">http://192.168.0.17/onlineshop/</string>
+    <string name="base_url">https://onlineshop.destinyconsultant.tech/</string>
+    <string name="uploadImages">Set your image</string>
 </resources>
