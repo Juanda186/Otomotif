@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.destinyapp.onlineshop.API.ApiRequest;
 import com.destinyapp.onlineshop.API.RetroServer;
+import com.destinyapp.onlineshop.Adapter.AdapterHistory;
 import com.destinyapp.onlineshop.Adapter.AdapterProduct;
 import com.destinyapp.onlineshop.Adapter.MyAdapterProduct;
 import com.destinyapp.onlineshop.Model.DataModel;
@@ -95,9 +96,9 @@ public class HistoryActivity extends AppCompatActivity {
         if(id == R.id.action_settings){
             method.Logout(HistoryActivity.this);
         }else if(id == R.id.action_wallet){
-            Toast.makeText(this, "Pengisian Wallet ?", Toast.LENGTH_SHORT).show();
+            method.Wallet(this);
         }else if(id == R.id.action_isi){
-            Toast.makeText(this, "Permintaan Pengisian", Toast.LENGTH_SHORT).show();
+            method.Isi(this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -130,9 +131,9 @@ public class HistoryActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                     if (response.body().getStatus().equals("success")){
                         available.setVisibility(View.GONE);
-                        rv.setLayoutManager(new GridLayoutManager(HistoryActivity.this, 2));
+                        rv.setLayoutManager(new GridLayoutManager(HistoryActivity.this, 1));
                         mItems=response.body().getData();
-                        AdapterProduct gridAdapter = new AdapterProduct(HistoryActivity.this,mItems);
+                        AdapterHistory gridAdapter = new AdapterHistory(HistoryActivity.this,mItems);
                         rv.setAdapter(gridAdapter);
                     }else{
                         available.setVisibility(View.VISIBLE);
@@ -141,13 +142,51 @@ public class HistoryActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseModel> call, Throwable t) {
-                    Toast.makeText(HistoryActivity.this, "Koneksi Gagal", Toast.LENGTH_SHORT).show();
+                    available.setVisibility(View.VISIBLE);
                 }
             });
         }else if(activity.equals("Beli")){
+            Call<ResponseModel> Log = api.BeliHistory(username);
+            Log.enqueue(new Callback<ResponseModel>() {
+                @Override
+                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                    if (response.body().getStatus().equals("success")){
+                        available.setVisibility(View.GONE);
+                        rv.setLayoutManager(new GridLayoutManager(HistoryActivity.this, 1));
+                        mItems=response.body().getData();
+                        AdapterHistory gridAdapter = new AdapterHistory(HistoryActivity.this,mItems);
+                        rv.setAdapter(gridAdapter);
+                    }else{
+                        available.setVisibility(View.VISIBLE);
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<ResponseModel> call, Throwable t) {
+                    available.setVisibility(View.VISIBLE);
+                }
+            });
         }else{
+            Call<ResponseModel> Log = api.JualHistory(username);
+            Log.enqueue(new Callback<ResponseModel>() {
+                @Override
+                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                    if (response.body().getStatus().equals("success")){
+                        available.setVisibility(View.GONE);
+                        rv.setLayoutManager(new GridLayoutManager(HistoryActivity.this, 1));
+                        mItems=response.body().getData();
+                        AdapterHistory gridAdapter = new AdapterHistory(HistoryActivity.this,mItems);
+                        rv.setAdapter(gridAdapter);
+                    }else{
+                        available.setVisibility(View.VISIBLE);
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<ResponseModel> call, Throwable t) {
+                    available.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 }

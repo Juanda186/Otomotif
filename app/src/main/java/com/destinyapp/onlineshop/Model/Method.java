@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.destinyapp.onlineshop.Activity.LoginActivity;
 import com.destinyapp.onlineshop.Activity.MainActivity;
@@ -33,6 +34,12 @@ public class Method {
         String MAGIC1 = magic.replace("Rp.","");
         String MAGIC2 = MAGIC1.replace(",",".");
         return MAGIC2;
+    }
+    public void Wallet(Context ctx){
+        Toast.makeText(ctx, "Pengisian Wallet ?", Toast.LENGTH_SHORT).show();
+    }
+    public void Isi(Context ctx){
+        Toast.makeText(ctx, "Permintaan Pengisian", Toast.LENGTH_SHORT).show();
     }
     public void Logout(final Context ctx){
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);

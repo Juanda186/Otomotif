@@ -96,9 +96,9 @@ public class ProductActivity extends AppCompatActivity {
         if(id == R.id.action_settings){
             method.Logout(ProductActivity.this);
         }else if(id == R.id.action_wallet){
-            Toast.makeText(this, "Pengisian Wallet ?", Toast.LENGTH_SHORT).show();
+            method.Wallet(ProductActivity.this);
         }else if(id == R.id.action_isi){
-            Toast.makeText(this, "Permintaan Pengisian", Toast.LENGTH_SHORT).show();
+            method.Isi(ProductActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -131,7 +131,7 @@ public class ProductActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                     if (response.body().getStatus().equals("success")){
                         available.setVisibility(View.GONE);
-                        rv.setLayoutManager(new GridLayoutManager(ProductActivity.this, 2));
+                        rv.setLayoutManager(new GridLayoutManager(ProductActivity.this, 1));
                         mItems=response.body().getData();
                         AdapterProduct gridAdapter = new AdapterProduct(ProductActivity.this,mItems);
                         rv.setAdapter(gridAdapter);
@@ -152,7 +152,7 @@ public class ProductActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                     if (response.body().getStatus().equals("success")){
                         available.setVisibility(View.GONE);
-                        rv.setLayoutManager(new GridLayoutManager(ProductActivity.this, 2));
+                        rv.setLayoutManager(new GridLayoutManager(ProductActivity.this, 1));
                         mItems=response.body().getData();
                         MyAdapterProduct gridAdapter = new MyAdapterProduct(ProductActivity.this,mItems);
                         rv.setAdapter(gridAdapter);

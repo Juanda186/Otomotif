@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.destinyapp.onlineshop.Activity.HistoryActivity;
 import com.destinyapp.onlineshop.Activity.LoginActivity;
 import com.destinyapp.onlineshop.Activity.ProductActivity;
 import com.destinyapp.onlineshop.R;
@@ -57,7 +58,7 @@ public class HistoryFragment extends Fragment {
         Seluruh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goInput = new Intent(getActivity(), ProductActivity.class);
+                Intent goInput = new Intent(getActivity(), HistoryActivity.class);
                 goInput.putExtra("ACTIVITY","All");
                 getActivity().startActivities(new Intent[]{goInput});
                 startActivity(goInput);
@@ -66,7 +67,7 @@ public class HistoryFragment extends Fragment {
         Beli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goInput = new Intent(getActivity(), ProductActivity.class);
+                Intent goInput = new Intent(getActivity(), HistoryActivity.class);
                 goInput.putExtra("ACTIVITY","Beli");
                 getActivity().startActivities(new Intent[]{goInput});
                 startActivity(goInput);
@@ -75,7 +76,7 @@ public class HistoryFragment extends Fragment {
         Jual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goInput = new Intent(getActivity(), ProductActivity.class);
+                Intent goInput = new Intent(getActivity(), HistoryActivity.class);
                 goInput.putExtra("ACTIVITY","Jual");
                 getActivity().startActivities(new Intent[]{goInput});
                 startActivity(goInput);

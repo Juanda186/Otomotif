@@ -37,4 +37,10 @@ public interface ApiRequest {
     @FormUrlEncoded
     @POST("history/jual")
     Call<ResponseModel> JualHistory(@Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("product/penjualan")
+    Call<ResponseModel> Penjualan(@Field("username") String username,
+                                  @Field("id_barang") String id_barang,
+                                  @Field("beli") String beli);
 }

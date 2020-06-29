@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|top"
-            android:text="Sedang Tidak Ada Product yang dijual"
+            android:text="Sedang Tidak Ada data History"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"/>
     </LinearLayout>

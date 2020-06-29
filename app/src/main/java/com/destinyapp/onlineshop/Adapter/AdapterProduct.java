@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,20 +19,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.destinyapp.onlineshop.API.ApiRequest;
+import com.destinyapp.onlineshop.API.RetroServer;
+import com.destinyapp.onlineshop.Activity.HistoryActivity;
 import com.destinyapp.onlineshop.Activity.MainActivity;
 import com.destinyapp.onlineshop.Model.DataModel;
 import com.destinyapp.onlineshop.Model.Method;
+import com.destinyapp.onlineshop.Model.ResponseModel;
 import com.destinyapp.onlineshop.R;
 import com.destinyapp.onlineshop.SharedPreferance.DB_Helper;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderData> {
     private List<DataModel> mList;
     private Context ctx;
     Dialog myDialog;
     Method method;
+    EditText Jumlah;
+    TextView Barang;
+    Button Submit,Cancel;
+    DB_Helper dbHelper;
+    String username,nama,email,profile,alamat,level;
     public AdapterProduct (Context ctx,List<DataModel> mList){
         this.ctx = ctx;
         this.mList = mList;
@@ -47,8 +61,27 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderDa
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProduct.HolderData holderData, int posistion) {
-        DataModel dm = mList.get(posistion);
+        final DataModel dm = mList.get(posistion);
         method=new Method();
+        myDialog = new Dialog(ctx);
+        myDialog.setContentView(R.layout.dialog_beli);
+        Jumlah=myDialog.findViewById(R.id.etJumlah);
+        Barang=myDialog.findViewById(R.id.tvNamaBarangs);
+        Submit=myDialog.findViewById(R.id.btnBeli);
+        Cancel=myDialog.findViewById(R.id.btnCancel);
+        dbHelper = new DB_Helper(ctx);
+        Cursor cursor = dbHelper.checkSession();
+        if (cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                username = cursor.getString(0);
+                nama = cursor.getString(1);
+                email = cursor.getString(2);
+                profile = cursor.getString(3);
+                alamat = cursor.getString(4);
+                level = cursor.getString(5);
+            }
+        }
+
         holderData.nama.setText(dm.getNama_barang());
         holderData.harga.setText(method.MagicRP(Double.parseDouble(dm.getHarga())));
         holderData.quantity.setText(method.MagicNumber(method.MagicRP(Double.parseDouble(dm.getQuantity()))));
@@ -59,7 +92,27 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderDa
         holderData.beli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myDialog.show();
+                Submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (Jumlah.getText().toString().isEmpty() || Jumlah.getText().toString().equals("0")){
+                            Toast.makeText(ctx, "Harap isi data Jumlah", Toast.LENGTH_SHORT).show();
+                        }else{
 
+                            String j = Jumlah.getText().toString();
+                            String q = dm.getQuantity();
+                            Checker(j,q,username,dm.getId());
+
+                        }
+                    }
+                });
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog.hide();
+                    }
+                });
             }
         });
         holderData.detail.setOnClickListener(new View.OnClickListener() {
@@ -91,5 +144,41 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderDa
             detail=v.findViewById(R.id.linearDetail);
         }
     }
+    private void Checker(final String j,final String q,final String User,final String IDS){
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> log = api.Checker(username);
+        log.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.body().getStatus().equals("success")){
+                    if (Integer.parseInt(j) <= Integer.parseInt(q)){
+                        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+                        Call<ResponseModel> log = api.Penjualan(User,IDS,j);
+                        log.enqueue(new Callback<ResponseModel>() {
+                            @Override
+                            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                Toast.makeText(ctx, "Pembelian Sukses", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ctx,MainActivity.class);
+                                ctx.startActivity(intent);
+                            }
 
+                            @Override
+                            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                                Toast.makeText(ctx, "Koneksi Gagal Pembelian Gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else{
+                        Toast.makeText(ctx, "Stock barang Sedang Kurang", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(ctx, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(ctx, "Koneksi internet Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

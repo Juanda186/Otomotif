@@ -40,13 +40,11 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    //harusnya udah jalan sih tampilannya
-    //berat banget jalanin di emulator wkwkkw
+
     ImageView Profile;
     TextView Nama,Username;
     DB_Helper dbHelper;
     String username,nama,email,profile,alamat,level;
-    MenuItem wallets;
     Method method;
     MenuItem Wallet,Isi,Logout,Prof;
     @Override
@@ -143,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
         if(id == R.id.action_settings){
             method.Logout(MainActivity.this);
         }else if(id == R.id.action_wallet){
-            Toast.makeText(this, "Pengisian Wallet ?", Toast.LENGTH_SHORT).show();
+            method.Wallet(MainActivity.this);
         }else if(id == R.id.action_isi){
-            Toast.makeText(this, "Permintaan Pengisian", Toast.LENGTH_SHORT).show();
+            method.Isi(MainActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }
