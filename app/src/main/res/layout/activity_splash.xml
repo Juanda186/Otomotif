@@ -6,14 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Activity.SplashActivity">
 
-    <TextView
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="INI SPLASH SCREEN"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:gravity="center"/>
+        android:layout_height="match_parent"
+        app:lottie_loop="true"
+        app:lottie_fileName="animation blue waves.json"
+        app:lottie_autoPlay="true"
+        android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </ImageView>
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_fileName="Loading1.json"
+            app:lottie_autoPlay="true"
+            android:id="@+id/loading"
+            android:scaleType="fitXY"/>
+    </LinearLayout>
 </RelativeLayout>

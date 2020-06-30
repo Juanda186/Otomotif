@@ -2,21 +2,25 @@ package com.destinyapp.onlineshop.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.destinyapp.onlineshop.R;
 import com.destinyapp.onlineshop.SharedPreferance.DB_Helper;
 
 public class SplashActivity extends AppCompatActivity {
     DB_Helper dbHelper;
     String username,nama,email,profile,alamat,level;
+    LottieAnimationView Animation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        Animation=findViewById(R.id.loading);
         //ini adalah logika simple dalam splash screen
         final Handler handler = new Handler();
 
@@ -32,15 +36,32 @@ public class SplashActivity extends AppCompatActivity {
                 level = cursor.getString(5);
             }
         }
+
         if (username!=null){
             Intent intent = new Intent(SplashActivity.this,MainActivity.class);
             startActivity(intent);
-        }else{
-            handler.postDelayed(new Runnable() {
-                public void run() {
+        }else {
+            Animation.addAnimatorListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
                     changeActivity();
                 }
-            }, 3000); //3000 L = 3 detik/Milisecond
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
         }
 
     }
