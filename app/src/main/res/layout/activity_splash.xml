@@ -21,7 +21,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:src="@drawable/logo"
+            android:layout_margin="105dp">
 
         </ImageView>
         <com.airbnb.lottie.LottieAnimationView
