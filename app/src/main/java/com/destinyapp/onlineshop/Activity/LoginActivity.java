@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.destinyapp.onlineshop.API.ApiRequest;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username,password;
     Button Login;
     DB_Helper dbHelper;
+    TextView register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +34,18 @@ public class LoginActivity extends AppCompatActivity {
         username=findViewById(R.id.etUsername);
         password=findViewById(R.id.etPassword);
         Login=findViewById(R.id.btnLogin);
+        register=findViewById(R.id.tvRegister);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Logic();
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }

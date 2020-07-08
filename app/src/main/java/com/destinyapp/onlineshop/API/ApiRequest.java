@@ -17,10 +17,17 @@ public interface ApiRequest {
     @POST("user/Login")
     Call<ResponseModel> Login(@Field("username") String username,
                                      @Field("password") String password);
-
     @FormUrlEncoded
     @POST("user/Checker")
     Call<ResponseModel> Checker(@Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("user/Register")
+    Call<ResponseModel> Register(@Field("username") String username,
+                                @Field("password") String password,
+                                @Field("nama") String nama,
+                                @Field("email") String email,
+                                @Field("alamat") String alamat);
 
     @FormUrlEncoded
     @POST("product/All")
