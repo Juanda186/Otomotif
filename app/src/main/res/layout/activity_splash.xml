@@ -17,22 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/logo"
-            android:layout_margin="105dp">
-
-        </ImageView>
+        android:orientation="vertical"
+        android:layout_margin="20dp">
         <com.airbnb.lottie.LottieAnimationView
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:lottie_fileName="Loading1.json"
+            app:lottie_fileName="gear2.json"
             app:lottie_autoPlay="true"
-            android:id="@+id/loading"
-            android:scaleType="fitXY"/>
+            android:id="@+id/loading"/>
     </LinearLayout>
 </RelativeLayout>

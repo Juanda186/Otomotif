@@ -30,11 +30,11 @@ public interface ApiRequest {
                                 @Field("alamat") String alamat);
 
     @FormUrlEncoded
-    @POST("product/All")
+    @POST("product/AllKategori")
     Call<ResponseModel> AllProduct(@Field("username") String username);
 
     @FormUrlEncoded
-    @POST("product/My")
+    @POST("product/MyKategori")
     Call<ResponseModel> MyProduct(@Field("username") String username);
 
     @FormUrlEncoded
