@@ -55,12 +55,16 @@ public class DataModel {
 
     @SerializedName("deskripsi")
     @Expose
-    public String id_penjual;
+    public String deskripsi;
 
     //history
     @SerializedName("id_pembeli")
     @Expose
     public String id_pembeli;
+
+    @SerializedName("id_penjual")
+    @Expose
+    public String id_penjual;
 
     @SerializedName("total")
     @Expose
@@ -164,12 +168,12 @@ public class DataModel {
         this.gambar = gambar;
     }
 
-    public String getId_penjual() {
-        return id_penjual;
+    public String getDeskripsi() {
+        return deskripsi;
     }
 
-    public void setId_penjual(String id_penjual) {
-        this.id_penjual = id_penjual;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
     public String getId_pembeli() {
@@ -186,5 +190,13 @@ public class DataModel {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getId_penjual() {
+        return id_penjual;
+    }
+
+    public void setId_penjual(String id_penjual) {
+        this.id_penjual = id_penjual;
     }
 }

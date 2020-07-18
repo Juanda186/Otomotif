@@ -24,7 +24,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.RegisterActivity"></activity>
+        <activity android:name=".Activity.DetailActivity"
+            android:label="Detail Barang"
+            android:parentActivityName=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.InputProductActivity" />
         <activity
             android:name=".Activity.HistoryActivity"

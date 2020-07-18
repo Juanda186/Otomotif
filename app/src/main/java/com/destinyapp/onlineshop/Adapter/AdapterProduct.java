@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.destinyapp.onlineshop.API.ApiRequest;
 import com.destinyapp.onlineshop.API.RetroServer;
+import com.destinyapp.onlineshop.Activity.DetailActivity;
 import com.destinyapp.onlineshop.Activity.HistoryActivity;
 import com.destinyapp.onlineshop.Activity.MainActivity;
 import com.destinyapp.onlineshop.Model.DataModel;
@@ -99,7 +100,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderDa
                         if (Jumlah.getText().toString().isEmpty() || Jumlah.getText().toString().equals("0")){
                             Toast.makeText(ctx, "Harap isi data Jumlah", Toast.LENGTH_SHORT).show();
                         }else{
-
                             String j = Jumlah.getText().toString();
                             String q = dm.getQuantity();
                             Checker(j,q,username,dm.getId());
@@ -118,7 +118,14 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.HolderDa
         holderData.detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent goInput = new Intent(ctx, DetailActivity.class);
+                goInput.putExtra("GAMBAR",ctx.getString(R.string.base_url)+"img/product/"+dm.getGambar());
+                goInput.putExtra("NAMA_BARANG",dm.getNama_barang());
+                goInput.putExtra("HARGA",method.MagicRP(Double.parseDouble(dm.getHarga())));
+                goInput.putExtra("QUANTITY",method.MagicNumber(method.MagicRP(Double.parseDouble(dm.getQuantity()))));
+                goInput.putExtra("DESKRIPSI",dm.getDeskripsi());
+                goInput.putExtra("PENJUAL",dm.getNama());
+                ctx.startActivities(new Intent[]{goInput});
             }
         });
         holderData.dm=dm;
